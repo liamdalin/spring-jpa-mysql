@@ -1,0 +1,18 @@
+# run command: docker-compose up
+services:
+    db:
+        image: mysql/mysql-server
+        volumes:
+            - "./.data/db:/var/lib/mysql"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: mydb
+            MYSQL_USER: user
+            MYSQL_PASSWORD: user
+        ports:
+            - '42333:3306'
+        networks:
+            - mysql_db
+networks:
+  mysql_db:
+    name: mysql_db
