@@ -29,5 +29,9 @@ dependency-reduced-pom.xml
 *.iws
 *.idea
 
+# project files
+*.jar
+.data
+
 .vscode/
 README.html
