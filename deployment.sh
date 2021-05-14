@@ -17,11 +17,17 @@ echo "$(date "+%Y_%m_%d-%H:%M:%S") move jar file to docker build folder"
 mv build/libs/*.jar docker/spring-data-mysql/${PROJECT_NAME}.jar
 
 echo "$(date "+%Y_%m_%d-%H:%M:%S") remove current running container"
-# docker ps -q --filter ancestor=<image_name:tag>
-docker stop $(docker ps -q --filter ancestor=${PROJECT_NAME}:${BUILD_VERSION})
-docker rm $(docker ps -a -q --filter ancestor=${PROJECT_NAME}:${BUILD_VERSION})
+# docker ps show running containers
+# grep <image-name> search for image-name in the previous command output
+# awk '{ print $1 }' take the first 'column' (in this case the container id)
+docker stop $(docker ps | grep ${PROJECT_NAME} | awk '{ print $1 }')
+docker rm $(docker ps -a | grep ${PROJECT_NAME} | awk '{ print $1 }')
 
-docker rmi $(docker images -q --filter reference=${PROJECT_NAME}:${BUILD_VERSION})
+echo "$(date "+%Y_%m_%d-%H:%M:%S") remove current app image"
+# docker image ls show images
+# grep <image-name> search for image-name in the previous command output
+# awk '{ print $3 }' take the third 'column' (in this case the image id)
+docker rmi $(docker image ls | grep ${PROJECT_NAME} | awk '{ print $3 }')
 
 cd docker/spring-data-mysql
 

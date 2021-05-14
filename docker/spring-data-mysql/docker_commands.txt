@@ -4,7 +4,14 @@ docker build -t spring-jpa-mysql .
 
 docker run -dp 8090:8090 --name spring-jpa-mysql --network mysql_db spring-jpa-mysql
 
-# docker ps -q --filter ancestor=<image_name:tag>
-docker stop $(docker ps -q --filter ancestor=spring-jpa-mysql)
+# docker ps show running containers
+# grep <image-name> search for image-name in the previous command output
+# awk '{ print $1 }' take the first 'column' (in this case the container id)
+docker stop $(docker ps | grep spring-jpa-mysql | awk '{ print $1 }')
 
-docker rm $(docker ps -a -q --filter ancestor=spring-jpa-mysql)
+docker rm $(docker ps -a | grep spring-jpa-mysql | awk '{ print $1 }')
+
+# docker image ls show images
+# grep <image-name> search for image-name in the previous command output
+# awk '{ print $3 }' take the third 'column' (in this case the image id)
+docker rmi $(docker image ls | grep spring-jpa-mysql | awk '{ print $3 }')
