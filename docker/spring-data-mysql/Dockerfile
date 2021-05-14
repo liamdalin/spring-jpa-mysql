@@ -1,5 +1,5 @@
 FROM openjdk:8-jre-alpine
 WORKDIR /
-ADD spring-data-mysql-0.0.1-SNAPSHOT.jar spring-data-mysql-0.0.1-SNAPSHOT.jar
+ADD spring-jpa-mysql.jar spring-jpa-mysql.jar
 EXPOSE 8090
-CMD java -Xmx512m -Xms512m -jar spring-data-mysql-0.0.1-SNAPSHOT.jar
+CMD java -Xmx512m -Xms512m -jar spring-jpa-mysql.jar

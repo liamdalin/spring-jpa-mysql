@@ -1,5 +1,9 @@
 copy Gradle assemble jar file to this folder and run below docker command.
 
-docker build -t spring-data-mysql .
+docker build -t spring-jpa-mysql .
 
-docker run -dp 8090:8090 --network mysql_db spring-data-mysql
+docker run -dp 8090:8090 --name spring-jpa-mysql --network mysql_db spring-jpa-mysql
+
+docker stop $(docker ps -q --filter ancestor=spring-jpa-mysql)
+
+docker rm $(docker ps -a -q --filter ancestor=spring-jpa-mysql)
