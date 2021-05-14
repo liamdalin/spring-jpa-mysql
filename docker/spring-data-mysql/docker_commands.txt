@@ -4,6 +4,7 @@ docker build -t spring-jpa-mysql .
 
 docker run -dp 8090:8090 --name spring-jpa-mysql --network mysql_db spring-jpa-mysql
 
+# docker ps -q --filter ancestor=<image_name:tag>
 docker stop $(docker ps -q --filter ancestor=spring-jpa-mysql)
 
 docker rm $(docker ps -a -q --filter ancestor=spring-jpa-mysql)

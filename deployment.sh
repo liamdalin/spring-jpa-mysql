@@ -17,6 +17,7 @@ echo "$(date "+%Y_%m_%d-%H:%M:%S") move jar file to docker build folder"
 mv build/libs/*.jar docker/spring-data-mysql/${PROJECT_NAME}.jar
 
 echo "$(date "+%Y_%m_%d-%H:%M:%S") remove current running container"
+# docker ps -q --filter ancestor=<image_name:tag>
 docker stop $(docker ps -q --filter ancestor=${PROJECT_NAME}:${BUILD_VERSION})
 docker rm $(docker ps -a -q --filter ancestor=${PROJECT_NAME}:${BUILD_VERSION})
 
