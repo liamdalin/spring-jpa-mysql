@@ -1,3 +1,0 @@
-docker build -t spring-data-mysql .
-
-docker run -dp 8090:8090 --network mysql_db spring-data-mysql
